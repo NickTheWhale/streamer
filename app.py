@@ -17,6 +17,11 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/editor')
+def editor():
+    return render_template('editor.html')
+
+
 def gen(camera):
     """Video streaming generator function."""
     yield b'--frame\r\n'
