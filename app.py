@@ -1,6 +1,4 @@
-#!/usr/bin/env python
-from importlib import import_module
-from flask import Flask, render_template, Response
+from flask import Flask, render_template, Response, request, redirect
 
 # import camera driver
 from camera import Camera
@@ -11,14 +9,30 @@ from camera import Camera
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
     """Video streaming home page."""
+    if request.method == 'POST':
+        if request.form.get('Play') == 'Play':
+            Camera.pause(False)
+        elif request.form.get('Pause') == 'Pause':
+            Camera.pause(True)
+        elif request.form.get('Editor') == 'Editor':
+            return redirect('/editor')
+        
     return render_template('index.html')
 
 
-@app.route('/editor')
+@app.route('/editor', methods=['GET', 'POST'])
 def editor():
+    if request.method == 'POST':
+        if request.form.get('Play') == 'Play':
+            Camera.pause(False)
+        elif request.form.get('Pause') == 'Pause':
+            Camera.pause(True)
+        elif request.form.get('Home') == 'Home':
+            return redirect('/')
+    
     return render_template('editor.html')
 
 
