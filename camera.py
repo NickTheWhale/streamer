@@ -1,6 +1,7 @@
 import cv2
 from pathlib import Path
 from base_camera import BaseCamera
+import time
 
 
 class Camera(BaseCamera):

@@ -20,7 +20,7 @@ def index():
         elif request.form.get('Editor') == 'Editor':
             return redirect('/editor')
         
-    return render_template('index.html')
+    return render_template('index.html') 
 
 
 @app.route('/editor', methods=['GET', 'POST'])
@@ -36,7 +36,7 @@ def editor():
     return render_template('editor.html')
 
 
-def gen(camera):
+def gen(camera: Camera):
     """Video streaming generator function."""
     yield b'--frame\r\n'
     while True:
