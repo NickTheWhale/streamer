@@ -1,9 +1,6 @@
 import time
 import threading
-try:
-    from threading import get_ident
-except ImportError:
-    from _thread import get_ident
+from threading import get_ident
 
 
 class CameraEvent:
@@ -72,7 +69,7 @@ class BaseCamera:
 
         # wait for a signal from the camera thread
         BaseCamera.event.wait()
-        BaseCamera.event.clear()
+        BaseCamera.event.clear() 
 
         return BaseCamera.frame
 
