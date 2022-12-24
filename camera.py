@@ -5,7 +5,7 @@ import time
 
 
 class Camera(BaseCamera):
-    video_source = 0
+    video_source = 1
     paused = False
     paused_image = open(Path('assets/paused_image.png'), 'rb').read()
 

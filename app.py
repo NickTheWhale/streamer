@@ -1,7 +1,8 @@
 from flask import Flask, render_template, Response, request, redirect
 
 # import camera driver
-from camera import Camera
+# from camera import Camera
+from depth_camera import Camera
 
 # Raspberry Pi camera module (requires picamera package)
 # from camera_pi import Camera
@@ -19,6 +20,10 @@ def index():
             Camera.pause(True)
         elif request.form.get('Editor') == 'Editor':
             return redirect('/editor')
+        elif request.form.get('Color') == 'Color':
+            Camera.set_video_source('COLOR')
+        elif request.form.get('Depth') == 'Depth':
+            Camera.set_video_source('DEPTH')
         
     return render_template('index.html') 
 
