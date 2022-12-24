@@ -35,7 +35,6 @@ class Camera(BaseCamera):
                     
                     color_depth_frame = Camera.colorizer.colorize(depth_frame)
                     color_depth_image = np.asanyarray(color_depth_frame.get_data())
-
                     # encode as a jpeg image and return it
                     yield cv2.imencode('.jpg', color_depth_image)[1].tobytes()
                     
@@ -46,7 +45,6 @@ class Camera(BaseCamera):
                         continue
                     
                     color_image = np.asanyarray(color_frame.get_data())
-
                     # encode as a jpeg image and return it
                     yield cv2.imencode('.jpg', color_image)[1].tobytes()
                     
@@ -62,24 +60,9 @@ class Camera(BaseCamera):
         print('Starting camera pipeline.')
         pipeline = rs.pipeline()
         config = rs.config()
-
         # Get device product line for setting a supporting resolution
-        pipeline_wrapper = rs.pipeline_wrapper(pipeline)
-        pipeline_profile = config.resolve(pipeline_wrapper)
-        device = pipeline_profile.get_device()
-
-        found_rgb = False
-        for s in device.sensors:
-            if s.get_info(rs.camera_info.name) == 'RGB Camera':
-                found_rgb = True
-                break
-        if not found_rgb:
-            print("The demo requires Depth camera with Color sensor")
-
         config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 30)
-
         config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
-
         # Start streaming
         pipeline.start(config)
         
