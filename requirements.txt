@@ -1,0 +1,14 @@
+autopep8==2.0.1
+click==8.1.3
+colorama==0.4.6
+Flask==2.2.2
+gunicorn==20.1.0
+itsdangerous==2.1.2
+Jinja2==3.1.2
+MarkupSafe==2.1.1
+numpy==1.23.5
+opencv-python==4.6.0.66
+pycodestyle==2.10.0
+pyrealsense2==2.53.1.4623
+tomli==2.0.1
+Werkzeug==2.2.2
